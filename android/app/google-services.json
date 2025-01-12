@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "118335818002",
+    "project_id": "solarsparkar-c5cd9",
+    "storage_bucket": "solarsparkar-c5cd9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118335818002:android:9e927e018e1bdbf99ccbcb",
+        "android_client_info": {
+          "package_name": "com.example.solarsparkar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg73FjUBdeyFsCN02GY2Xuun9cQTLRoS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
