@@ -81,14 +81,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
             // Username Field
             TextField(
               controller: _usernameController,
-              decoration: const InputDecoration(labelText: 'Username'),
+              decoration: const InputDecoration(
+                labelText: 'Username',
+                labelStyle: TextStyle(color: Colors.white), // Label color
+              ),
+              style: const TextStyle(color: Colors.white), // Input text color
             ),
             const SizedBox(height: 20),
             // Password Field
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'New Password'),
+              decoration: const InputDecoration(
+                labelText: 'New Password',
+                labelStyle: TextStyle(color: Colors.white), // Label color
+              ),
+              style: const TextStyle(color: Colors.white), // Input text color
             ),
             const SizedBox(height: 30),
             // Buttons

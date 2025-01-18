@@ -35,7 +35,7 @@ class _QuizDescriptionPageState extends State<QuizDescriptionPage> {
       appBar: AppBar(
         title: Text(
           widget.quiz.title,
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white), // AppBar title in white
         ),
         backgroundColor: const Color(0xFF2B223E),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -46,7 +46,12 @@ class _QuizDescriptionPageState extends State<QuizDescriptionPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return const Center(child: Text('Failed to load data.'));
+            return const Center(
+              child: Text(
+                'Failed to load data.',
+                style: TextStyle(color: Colors.white), // Error message in white
+              ),
+            );
           } else {
             final quizData = snapshot.data;
 
@@ -60,6 +65,7 @@ class _QuizDescriptionPageState extends State<QuizDescriptionPage> {
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white, // Title in white
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -67,6 +73,7 @@ class _QuizDescriptionPageState extends State<QuizDescriptionPage> {
                     widget.quiz.description,
                     style: const TextStyle(
                       fontSize: 16,
+                      color: Colors.white, // Description in white
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -76,7 +83,7 @@ class _QuizDescriptionPageState extends State<QuizDescriptionPage> {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Colors.green, // Highlight highest score in green
                       ),
                     ),
                   const Spacer(),
@@ -104,7 +111,7 @@ class _QuizDescriptionPageState extends State<QuizDescriptionPage> {
                       ),
                       child: const Text(
                         'Start',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: TextStyle(fontSize: 18, color: Colors.white), // Button text in white
                       ),
                     ),
                   ),

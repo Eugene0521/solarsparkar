@@ -74,11 +74,11 @@ class _LeaderboardState extends State<Leaderboard> {
               child: Column(
                 children: [
                   const Text(
-                    'Top Performers',
+                    '🎖️Top Performers🎖️',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Colors.indigo,
+                      color: Color.fromARGB(255, 255, 187, 0),
                     ),
                   ),
                   const SizedBox(height: 16),

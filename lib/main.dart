@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ARSolar App',
       theme: ThemeData(
+        fontFamily: 'Sniglet',
         primarySwatch: Colors.deepPurple,
+        scaffoldBackgroundColor: const Color(0xFF2B223E), // Global background color
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF2B223E), // AppBar background color
@@ -78,7 +80,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           Icon(Icons.star, size: 30),
           Icon(Icons.quiz, size: 30),
           Icon(Icons.person, size: 30),
-          Icon(Icons.camera_alt, size: 30),
+          Icon(Icons.public, size: 30),
           Icon(Icons.leaderboard, size: 30),
         ],
         onTap: (index) {

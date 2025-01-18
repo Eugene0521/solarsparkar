@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
         backgroundColor: const Color(0xFF2B223E),
         elevation: 0,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -85,7 +85,6 @@ class LoginPage extends StatelessWidget {
     final password = _passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      // Show a message for empty fields
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Please enter both email and password."),
@@ -96,14 +95,12 @@ class LoginPage extends StatelessWidget {
     }
 
     try {
-      // Call the AuthService signin function
       await AuthService().signin(
         email: email,
         password: password,
         context: context,
       );
     } catch (e) {
-      // Handle any errors that occur during login
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Login failed: ${e.toString()}"),

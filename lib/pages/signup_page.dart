@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'login_page.dart';  // Make sure the path to LoginPage is correct
+import 'login_page.dart'; // Make sure the path to LoginPage is correct
 
 class SignUpPage extends StatelessWidget {
-  SignUpPage({super.key});  // Removed 'const' keyword
+  SignUpPage({super.key});
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -18,7 +18,7 @@ class SignUpPage extends StatelessWidget {
         backgroundColor: const Color(0xFF2B223E),
         elevation: 0,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -52,10 +52,8 @@ class SignUpPage extends StatelessWidget {
                 ),
                 child: const Text(
                   'Sign Up',
-                    style: TextStyle(
-                      color: Colors.white,//Set the text to white color
-                    ),
-                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               TextButton(
                 onPressed: () {
@@ -82,10 +80,9 @@ class SignUpPage extends StatelessWidget {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      // Assuming Home() is your next page after successful signup
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()),  // Or navigate to your HomePage
+        MaterialPageRoute(builder: (context) => LoginPage()), // Navigate to LoginPage
       );
     } on FirebaseAuthException catch (e) {
       String message = '';

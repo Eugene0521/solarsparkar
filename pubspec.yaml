@@ -10,9 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  firebase_core: ^3.9.0
-  firebase_auth: ^5.3.4
-  cloud_firestore: ^5.6.0
+  firebase_core: ^3.10.0
+  firebase_auth: ^5.4.0
+  cloud_firestore: ^5.6.1
   fluttertoast: ^8.2.10
   curved_navigation_bar: ^1.0.6
   youtube_player_flutter: ^9.1.1
@@ -22,6 +22,9 @@ dependencies:
   arkit_plugin: ^1.1.1
   # arcore_flutter_plugin: ^0.1.0
   vector_math: ^2.1.4
+  collection: ^1.19.0
+  carousel_slider: ^5.0.0
+  flutter_tts: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -40,4 +43,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/3dmodels/
+    - assets/3dmodels/glb/
+    - assets/planet_png/
+    - assets/scene/
+
+  fonts:
+    - family: Sniglet
+      fonts:
+        - asset: assets/fonts/Sniglet-Regular.ttf

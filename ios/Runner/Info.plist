@@ -48,17 +48,15 @@
 	
 	<!-- Permissions for Camera and Photo Library Access -->
 	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to take photos.</string>
+	<string>This app requires camera access to create augmented reality experiences.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to pick images.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need access to save photos to your library.</string>
-
-	<!-- Permissions for Camera for AR -->
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires camera access to create augmented reality experiences</string>
+	<string>We need camera access to display augmented reality content.</string>
+	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-
 
 </dict>
 </plist>

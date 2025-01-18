@@ -104,7 +104,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       _username != null && _username!.isNotEmpty
                           ? _username!
                           : 'Please update your username',
-                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white, // Changed username color to white
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -134,7 +138,11 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 20),
               const Text(
                 'Quizzes Progress',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFEC5B20), // Changed text color to 0xFFEC5B20
+                ),
               ),
               ListView.builder(
                 shrinkWrap: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/quiz.dart';
 
@@ -13,10 +14,42 @@ class QuizQuestionPage extends StatefulWidget {
 }
 
 class _QuizQuestionPageState extends State<QuizQuestionPage> {
+  final FlutterTts _flutterTts = FlutterTts();
   int _currentQuestionIndex = 0;
   int? _selectedAnswerIndex;
   int _score = 0;
   bool _showFeedback = false;
+  bool _isMuted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startNarration(widget.quiz.questions[_currentQuestionIndex].question); // Start narration on page load
+  }
+
+  Future<void> _startNarration(String text) async {
+    if (!_isMuted) {
+      await _flutterTts.setLanguage("en-US");
+      await _flutterTts.setPitch(1.0);
+      await _flutterTts.setSpeechRate(0.5); // Adjust for a natural tone
+      await _flutterTts.speak(text);
+    }
+  }
+
+  Future<void> _stopNarration() async {
+    await _flutterTts.stop();
+  }
+
+  void _toggleMute() {
+    setState(() {
+      _isMuted = !_isMuted;
+      if (_isMuted) {
+        _stopNarration();
+      } else {
+        _startNarration(widget.quiz.questions[_currentQuestionIndex].question);
+      }
+    });
+  }
 
   Future<void> updateHighestScore() async {
     final userDoc = FirebaseFirestore.instance.collection('users').doc(widget.userId);
@@ -58,6 +91,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
         _currentQuestionIndex++;
         _selectedAnswerIndex = null;
         _showFeedback = false;
+        _startNarration(widget.quiz.questions[_currentQuestionIndex].question); // Narrate the next question
       } else {
         _finishQuiz();
       }
@@ -65,24 +99,31 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
   }
 
   void _finishQuiz() {
-  updateHighestScore();
-  showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: const Text('Quiz Completed!'),
-      content: Text('Your score: $_score/${widget.quiz.questions.length}'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context); // Close dialog
-            Navigator.pop(context, true); // Pass 'true' to indicate quiz completion
-          },
-          child: const Text('OK'),
-        ),
-      ],
-    ),
-  );
-}
+    updateHighestScore();
+    _stopNarration(); // Stop narration on quiz completion
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Quiz Completed!'),
+        content: Text('Your score: $_score/${widget.quiz.questions.length}'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context, true); // Pass 'true' to indicate quiz completion
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _stopNarration(); // Stop narration when leaving the page
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +133,15 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
       appBar: AppBar(
         title: Text(widget.quiz.title),
         backgroundColor: const Color(0xFF2B223E),
+        actions: [
+          IconButton(
+            icon: Icon(
+              _isMuted ? Icons.volume_off : Icons.volume_up,
+              color: Colors.white,
+            ),
+            onPressed: _toggleMute,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -100,7 +150,11 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           children: [
             Text(
               '${_currentQuestionIndex + 1}. ${question.question}',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // Changed question text color to white
+              ),
             ),
             const SizedBox(height: 20),
             ...List.generate(question.options.length, (index) {
@@ -146,7 +200,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
                 _currentQuestionIndex < widget.quiz.questions.length - 1
                     ? 'Next'
                     : 'Finish',
-                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                style: const TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
           ],
